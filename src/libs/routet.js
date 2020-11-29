@@ -3,13 +3,27 @@ import VueRouter from "vue-router";
 import { clearHttpRequestingList } from "../libs/axios";
 Vue.use(VueRouter);
 
-
 const routes = [
- 
+  {
+    path: "/",
+    name: "home",
+    component: () => import("../views/Home.vue"),
+    meta: {
+      keepAlive: true,
+    },
+  },
+  {
+    path: "/detail",
+    name: "detail",
+    component: () => import("../views/Detail.vue"),
+    meta: {
+      keepAlive: false,
+    },
+  },
 ];
 
 const router = new VueRouter({
-  mode: "history",
+  // mode: "history",
   routes,
 });
 
