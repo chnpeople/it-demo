@@ -92,7 +92,7 @@ export default {
     checkVersion() {
       this.$axios({
         methods: 'get',
-        uri: `${this.$baseUrl2}/version`,
+        uri: `${this.$baseUrl2}version`,
         successCallback: (res) => {
           console.log(res.version);
           if (res.version != this.version) {

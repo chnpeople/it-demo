@@ -1,9 +1,13 @@
 <template>
   <div id="app">
-    <keep-alive>
-      <router-view v-if="$route.meta.keepAlive"></router-view>
-    </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive"></router-view>
+    <transition :name="SkipSwitchName">
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive"></router-view>
+      </keep-alive>
+    </transition>
+    <transition :name="SkipSwitchName">
+      <router-view v-if="!$route.meta.keepAlive"></router-view>
+    </transition>
   </div>
 </template>
 
@@ -16,19 +20,53 @@ export default {
   //     home
   // },
   data() {
-    return {};
+    return {
+      SkipSwitchName: '',
+    };
+  },
+  watch: {
+    $route(to, from) {
+      if(from.meta.tx == undefined) {
+        return;
+      }
+      if (to.meta.tx > from.meta.tx) {
+        this.SkipSwitchName = 'Skright';
+      } else {
+        this.SkipSwitchName = 'Skleft';
+      }
+    },
   },
   created() {
     this.mui.plusReady(function () {
       // eslint-disable-next-line no-undef
-    plus.navigator.setStatusBarBackground('#fff');
-    // eslint-disable-next-line no-undef
-    plus.navigator.setStatusBarStyle('dark');
+      plus.navigator.setStatusBarBackground('#fff');
+      // eslint-disable-next-line no-undef
+      plus.navigator.setStatusBarStyle('dark');
     });
-    
   },
 };
 </script>
 
 <style>
+.Skright-enter-active,
+.Skright-leave-active,
+.Skleft-enter-active,
+.Sklef-leave-active {
+  transition: all 600ms;
+}
+
+.Skright-enter {
+  transform: translate3d(100%, 0, 0);
+  
+}
+.Skright-leave-to {
+  transform: translate3d(-100%, 0, 0);
+}
+.Skleft-enter {
+  transform: translate3d(-100%, 0, 0);
+}
+.Skleft-leave-to {
+  transform: translate3d(100%, 0, 0);
+  
+}
 </style>

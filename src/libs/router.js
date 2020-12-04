@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import { clearHttpRequestingList } from "../libs/axios";
+import { clearHttpRequestingList } from "./axios";
 Vue.use(VueRouter);
 
 const routes = [
@@ -10,6 +10,7 @@ const routes = [
     component: () => import("../views/Home.vue"),
     meta: {
       keepAlive: true,
+      tx: 1
     },
   },
   {
@@ -18,6 +19,7 @@ const routes = [
     component: () => import("../views/Detail.vue"),
     meta: {
       keepAlive: false,
+      tx: 2
     },
   },
 ];

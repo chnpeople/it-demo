@@ -71,7 +71,7 @@ export default {
     querySwiper() {
       this.$axios({
         methods: 'get',
-        uri: `${this.$baseUrl}/json/slide/index`,
+        uri: `${this.$baseUrl}json/slide/index`,
         successCallback: (res) => {
           let newRes = res.filter((item) => {
             return item.title.indexOf('红包') == -1;
@@ -85,8 +85,8 @@ export default {
         methods: 'get',
         uri:
           this.list.length == 0
-            ? `${this.$baseUrl}/json/newslist/news`
-            : 'https://m.ithome.com/api/news/newslistpageget',
+            ? `${this.$baseUrl}json/newslist/news`
+            : `${this.$baseUrl3}api/news/newslistpageget`,
         params:
           this.list.length == 0
             ? {}

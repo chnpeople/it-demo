@@ -3,7 +3,7 @@ import App from "./App.vue";
 import { ajax } from "./index";
 // import { ajax } from '../../libs/axios';
 // Vue.$httpRequestList = [];
-import router from './libs/routet';
+import router from './libs/router';
 import { baseUrl,  baseUrl2} from './libs/baseUrl';
 // import touch from 'vue-directive-touch';
 import VueTouch from 'vue-touch';

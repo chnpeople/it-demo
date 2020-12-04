@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --mode mock",
+    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "stg": "vue-cli-service build --mode mock",
     "lint": "vue-cli-service lint"
