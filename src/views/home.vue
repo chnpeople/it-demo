@@ -28,6 +28,18 @@
     </van-tabbar>
 
     <van-overlay :show="show" />
+
+    <van-overlay :show="downloadShow"
+                 @click="show = false">
+      <div class="wrapper"
+           @click.stop>
+        <van-circle v-model="currentRate"
+                    :rate="rate"
+                    color="#ee0a24"
+                    layer-color="#fff"
+                    :text="text" />
+      </div>
+    </van-overlay>
   </div>
 </template>
 
@@ -42,6 +54,9 @@ export default {
   },
   data() {
     return {
+      rate: '',
+      currentRate: 0,
+      downloadShow: false,
       active: 0,
       version: config.version,
       show: false,
@@ -68,6 +83,11 @@ export default {
       };
     });
   },
+  computed: {
+    text() {
+      return this.currentRate + '%';
+    },
+  },
   methods: {
     checkVersion() {
       this.$axios({
@@ -85,6 +105,7 @@ export default {
               .then(() => {
                 this.download();
                 this.show = false;
+                this.downloadShow = true;
               })
               .catch(() => {
                 this.show = false;
@@ -96,31 +117,36 @@ export default {
 
     download() {
       // eslint-disable-next-line no-undef
-      var pushLoading = plus.nativeUI.showWaiting('下载更新中，请勿关闭');
-      // const a = document.createElement('a');
-      // a.setAttribute('download', '');
-      // a.setAttribute('href', 'https://www.tim007.xyz/static/it-demo.apk');
-      // a.click();
+      // var pushLoading = plus.nativeUI.showWaiting('下载更新中，请勿关闭');
 
       // eslint-disable-next-line no-undef
       var dtask = plus.downloader.createDownload(
         `http://www.tim007.xyz:8383/download`,
         {},
-        function (d, status) {
-          console.log(d,status)
+        (d, status) => {
           // 下载完成
           if (status == 200) {
-            pushLoading.close();
+            this.downloadShow = false;
+            this.currentRate =  0;
+            // pushLoading.close();
             // eslint-disable-next-line no-undef
             plus.runtime.openFile(d.filename); //直接打开APK文件 安装
           } else {
-            pushLoading.close();
+            this.downloadShow = false;
+            this.currentRate =  0;
+            // pushLoading.close();
             // eslint-disable-next-line no-undef
             plus.nativeUI.toast('更新失败');
           }
         }
       );
       dtask.start();
+
+      dtask.addEventListener('statechanged',  task => {
+        // 给下载任务设置一个监听 并根据状态  做操作
+        let per = Number(task.downloadedSize / task.totalSize * 100).toFixed(0);
+        this.currentRate = isNaN(per) ? 0 : per; 
+      });
     },
   },
 };
@@ -176,5 +202,14 @@ export default {
   position: absolute;
   right: 1.8rem;
   top: 0.9rem;
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.van-circle__text {
+  color: #fff;
 }
 </style>
