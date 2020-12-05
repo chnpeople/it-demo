@@ -5,7 +5,7 @@
       <van-nav-bar title=""
                    left-arrow
                    @click-left="onClickLeft" />
-      <div class="news">
+      <div class="news" v-show="!showSkeleton">
         <h1 class="title">{{title}}</h1>
 
         <div class="author"
@@ -26,7 +26,7 @@
                         size="mini">+关注</van-button>
           </div>
         </div>
-
+        
         <div class="author-s"
              v-if="isShowAuthorS">
           <span>{{time | formatTime}}</span>
@@ -41,6 +41,17 @@
           <span>责任编辑：</span>
           <span>{{man}}</span>
         </div>
+      </div>
+      <div v-show="showSkeleton" class="my-skeleton" ref="skeleton">
+        <br>
+        <br>
+        <van-skeleton :row="2" />
+        <br>
+        <van-skeleton title avatar />
+        <br>
+        <br>
+        <van-skeleton :row="5" />
+
       </div>
     </div>
   </v-touch>
@@ -58,6 +69,7 @@ export default {
       authorObj: {},
       authorName: '',
       man: '',
+      showSkeleton: true
     };
   },
   filters: {
@@ -82,6 +94,8 @@ export default {
         this.$router.go(-1);
       };
     });
+    let mobileHeight=window.innerHeight;
+    this.$refs.skeleton.style.height = (mobileHeight - 46) + 'px';
   },
   methods: {
     onClickLeft() {
@@ -100,6 +114,7 @@ export default {
             this.isShowAuthorS = true;
             this.authorName = `${res.newssource}(${res.newsauthor})`;
           }
+          this.showSkeleton = false;
           this.man = res.z;
           let content = this.$refs.content;
           console.log(content);
@@ -167,5 +182,8 @@ export default {
 
 .v-touch {
   touch-action: pan-y !important;
+}
+.my-skeleton {
+  background-color: #fff;
 }
 </style>

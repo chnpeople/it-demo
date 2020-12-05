@@ -4,7 +4,7 @@ import { ajax } from "./index";
 // import { ajax } from '../../libs/axios';
 // Vue.$httpRequestList = [];
 import router from './libs/router';
-import { baseUrl,  baseUrl2} from './libs/baseUrl';
+import { baseUrl,  baseUrl2, baseUrl3} from './libs/baseUrl';
 // import touch from 'vue-directive-touch';
 import VueTouch from 'vue-touch';
 import mui from './libs/js/mui.js';
@@ -27,6 +27,7 @@ Vue.config.productionTip = false;
 let env = process.env.NODE_ENV;
 Vue.prototype.$baseUrl= (env === "development" ? '' : `${baseUrl}`);
 Vue.prototype.$baseUrl2= (env === "development" ? '' : `${baseUrl2}`);
+Vue.prototype.$baseUrl3= (env === "development" ? '' : `${baseUrl3}`);
 
 // Vue.directive('focusA', {
 //   // 当被绑定的元素插入到 DOM 中时……

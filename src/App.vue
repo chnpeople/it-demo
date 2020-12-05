@@ -52,7 +52,7 @@ export default {
 .Skright-leave-active,
 .Skleft-enter-active,
 .Sklef-leave-active {
-  transition: all 600ms;
+  transition: all 300ms;
 }
 
 .Skright-enter {
