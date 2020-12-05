@@ -1,3 +1,6 @@
+const webpack = require("webpack");
+const AddAssetHtmlWebpackPlugin = require("add-asset-html-webpack-plugin");
+const path = require("path"); //nodeJs的基本包
 console.log(process.env.NODE_ENV);
 console.log(process.env.VUE_APP_MOCK);
 let env = process.env.NODE_ENV;
@@ -6,7 +9,15 @@ module.exports = {
     //关闭 webpack 的性能提示
     performance: {
       hints:false
-    }
+    },
+    plugins: [
+      new webpack.DllReferencePlugin({
+        manifest: path.resolve(__dirname, "./dll/mydll.manifest.json"),
+      }),
+      new AddAssetHtmlWebpackPlugin({
+        filepath: path.resolve(__dirname, "./dll/mydll.dll.js"),
+      }),
+    ]
   },
   publicPath: env === "development" ? "/" : "./",
   devServer: {
@@ -37,4 +48,5 @@ module.exports = {
       },
     },
   },
+
 };
