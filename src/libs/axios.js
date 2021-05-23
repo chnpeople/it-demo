@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
+import qs from 'qs'
 
 // let env = process.env.NODE_ENV;
 // axios.defaults.baseURL= (env === "development" ? '' : 'https://api.ithome.com/');
@@ -8,9 +9,12 @@ import axios from 'axios';
 function ajax(options) {
     const CancelToken = axios.CancelToken
     axios({
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
         method: options.methods,
         url: options.uri,
-        params: options.params,
+        data: qs.stringify(options.data),
         cancelToken: new CancelToken(function executor(c) {
             Vue.$httpRequestList.push(c)
         })

@@ -46,6 +46,13 @@ module.exports = {
           "^/version": "",
         },
       },
+      "/user": {
+        target: "http://tim007.xyz:8383/user",
+        changeOrigin: true,
+        pathRewrite: {
+          "^/user": "",
+        },
+      },
     },
   },
 

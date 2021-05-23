@@ -18,13 +18,14 @@
     </div>
     <News style="height: 100%; margin-bottom: 4rem"
           v-if="active == 0" />
+    <Me style="height: 100%; margin-bottom: 4rem" v-if="active == 3" />
     <van-tabbar v-model="active"
                 active-color="#d22222"
                 inactive-color="#000">
-      <van-tabbar-item icon="home-o">资讯</van-tabbar-item>
-      <van-tabbar-item icon="search">发现</van-tabbar-item>
-      <van-tabbar-item icon="friends-o">圈子</van-tabbar-item>
-      <van-tabbar-item icon="contact">我</van-tabbar-item>
+      <van-tabbar-item icon="home-o" name="0">资讯</van-tabbar-item>
+      <van-tabbar-item icon="search" name="1">发现</van-tabbar-item>
+      <van-tabbar-item icon="friends-o" name="2">圈子</van-tabbar-item>
+      <van-tabbar-item icon="contact" name="3">我</van-tabbar-item>
     </van-tabbar>
 
     <van-overlay :show="show" />
@@ -48,6 +49,7 @@ import config from '../../package.json';
 export default {
   components: {
     News: () => import('../components/News'),
+    Me: () => import('../components/Me'),
   },
   created() {
     this.checkVersion();

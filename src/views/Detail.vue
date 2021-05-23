@@ -61,7 +61,7 @@
 export default {
   data() {
     return {
-      id: this.$route.query.item.newsid,
+      id: this.$route.query.item.newsid || this.$route.query.item.link,
       title: this.$route.query.item.title,
       time: this.$route.query.item.orderdate || '',
       isShowAuthor: false,

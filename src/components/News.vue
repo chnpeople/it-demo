@@ -14,7 +14,7 @@
                :autoplay="3000"
                indicator-color="white">
       <van-swipe-item v-for="(item, index) in imagesList"
-                      :key="index">
+                      :key="index" @click="openSwipe(item)">
         <img :src="item.image"
              alt="">
       </van-swipe-item>
@@ -68,6 +68,9 @@ export default {
     this.querySwiper();
   },
   methods: {
+    openSwipe(item) {
+      this.linkDetail(item);
+    },
     querySwiper() {
       this.$axios({
         methods: 'get',
