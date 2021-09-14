@@ -14,6 +14,7 @@ function ajax(options) {
         },
         method: options.methods,
         url: options.uri,
+        params: options.params,
         data: qs.stringify(options.data),
         cancelToken: new CancelToken(function executor(c) {
             Vue.$httpRequestList.push(c)

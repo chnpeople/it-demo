@@ -152,6 +152,9 @@ export default {
 </script>
 
 <style>
+.my-style .van-tab__text {
+  font-size: 1rem;
+}
 .my-swipe {
   margin-top: 1rem;
 }

@@ -177,7 +177,7 @@ export default {
   position: absolute;
   top: 1rem;
   left: 10.5rem;
-  width: 21rem;
+  width: 18rem;
   height: 2.4rem;
   background-color: #f3f4f5;
   border-radius: 2.2rem;
@@ -195,8 +195,7 @@ export default {
 }
 
 .my-icon {
-  top: -0.1rem;
-  left: -8rem;
+  left: -7rem;
   z-index: 2;
 }
 

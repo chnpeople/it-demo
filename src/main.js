@@ -9,6 +9,7 @@ import { baseUrl,  baseUrl2, baseUrl3} from './libs/baseUrl';
 import VueTouch from 'vue-touch';
 import mui from './libs/js/mui.js';
 import Vconsole from 'vconsole';
+import './libs/rem';
 
 console.log(process.env.VUE_APP_MOCK);
 let useV = process.env.VUE_APP_MOCK;
