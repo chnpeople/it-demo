@@ -7,7 +7,7 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: () => import("../views/Home.vue"),
+    component: () => import("../views/home.vue"),
     meta: {
       keepAlive: true,
       tx: 1
